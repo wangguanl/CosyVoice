@@ -101,11 +101,17 @@ def generate_audio(tts_text, mode_checkbox_group, sft_dropdown, prompt_text, pro
     elif mode_checkbox_group == '3s极速复刻':
         logging.info('get zero_shot inference request')
         set_all_random_seed(seed)
+        # CosyVoice3 requires <|endofprompt|> in prompt_text
+        if cosyvoice.__class__.__name__ == 'CosyVoice3' and '<|endofprompt|>' not in prompt_text:
+            prompt_text = 'You are a helpful assistant.<|endofprompt|>' + prompt_text
         for i in cosyvoice.inference_zero_shot(tts_text, prompt_text, prompt_wav, stream=stream, speed=speed):
             yield (cosyvoice.sample_rate, i['tts_speech'].numpy().flatten())
     elif mode_checkbox_group == '跨语种复刻':
         logging.info('get cross_lingual inference request')
         set_all_random_seed(seed)
+        # CosyVoice3 requires <|endofprompt|> in tts_text
+        if cosyvoice.__class__.__name__ == 'CosyVoice3' and '<|endofprompt|>' not in tts_text:
+            tts_text = 'You are a helpful assistant.<|endofprompt|>' + tts_text
         for i in cosyvoice.inference_cross_lingual(tts_text, prompt_wav, stream=stream, speed=speed):
             yield (cosyvoice.sample_rate, i['tts_speech'].numpy().flatten())
     else:
