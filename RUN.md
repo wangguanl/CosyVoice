@@ -11,7 +11,7 @@
 ```powershell
 $env:Path = "E:\Programs\ffmpeg-master-latest-win64-gpl\bin;" + $env:Path
 cd E:\AI\local-voice\CosyVoice
-git submodule update --init --recursive
+# third_party/Matcha-TTS 已内联进仓库（原为子模块），无需 git submodule update
 
 # 已有 .venv（Python 3.10 + torch 2.3.1+cu121）。若重建：
 # uv venv --python 3.10
