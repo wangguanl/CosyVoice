@@ -6,7 +6,7 @@
 $ErrorActionPreference = "Stop"
 
 # ---------- 配置 ----------
-$ProjectDir  = "e:\Pro2\CosyVoice"
+$ProjectDir  = "E:\AI\local-voice\CosyVoice"
 $VenvPython  = "$ProjectDir\.venv\Scripts\python.exe"
 $WebuiPy     = "$ProjectDir\webui.py"
 $ModelCache  = "E:\huggingface_cache"
